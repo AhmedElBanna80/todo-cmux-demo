@@ -1,4 +1,10 @@
+import { getTodos } from '@/lib/db';
+import { TodoForm } from '@/components/TodoForm';
+import { TodoItem } from '@/components/TodoItem';
+
 export default function Home() {
+  const todos = getTodos();
+
   return (
     <main className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-8">
       <div className="max-w-2xl mx-auto">
@@ -7,45 +13,20 @@ export default function Home() {
             My Tasks
           </h1>
           <p className="text-lg text-gray-600">
-            A progressive enhancement todo app built with Next.js
+            A progressive enhancement todo app built with Next.js 16.2
           </p>
         </header>
 
-        <form
-          action="/api/tasks"
-          method="POST"
-          className="bg-white rounded-lg shadow-md p-6 mb-8"
-        >
-          <div className="flex gap-2">
-            <input
-              type="text"
-              name="title"
-              placeholder="Add a new task..."
-              required
-              className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-            <button
-              type="submit"
-              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-lg transition-colors"
-            >
-              Add Task
-            </button>
-          </div>
-        </form>
+        <TodoForm />
 
         <div className="space-y-2">
-          <div className="bg-white rounded-lg shadow-md p-4 flex items-center gap-3">
-            <input
-              type="checkbox"
-              className="w-5 h-5 text-green-600 rounded cursor-pointer"
-            />
-            <span className="text-gray-700 flex-1">
-              Example: Build todo app with cmux-tab-agents
-            </span>
-            <button className="text-red-500 hover:text-red-700 font-semibold text-sm">
-              Delete
-            </button>
-          </div>
+          {todos.length === 0 ? (
+            <div className="text-center py-8 text-gray-500">
+              No tasks yet. Add one to get started!
+            </div>
+          ) : (
+            todos.map((todo) => <TodoItem key={todo.id} todo={todo} />)
+          )}
         </div>
       </div>
     </main>

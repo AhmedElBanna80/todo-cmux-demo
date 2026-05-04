@@ -133,10 +133,8 @@ Implement the ability to delete a todo item. Must show confirmation (works witho
 ```bash
 # In cmux session, as the planner:
 
-# 1. Create tickets (optional—could use task files directly)
-# github issue create --title "DEMO-1: Add Todo Item" --body "$(cat DEMO-1.md)"
-# github issue create --title "DEMO-2: Mark Complete" --body "$(cat DEMO-2.md)"
-# github issue create --title "DEMO-3: Delete Todo" --body "$(cat DEMO-3.md)"
+# 1. GitHub issues are already created (see Issues tab)
+# Agents will reference these issues in their work
 
 # 2. Dispatch all three implementers in parallel
 IMPL1=$(dispatch-implementer.sh --ticket DEMO-1 --slug add-todo ...)
